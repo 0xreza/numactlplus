@@ -14,6 +14,8 @@ extern long mbind(void *start, unsigned long len, int mode,
 	const unsigned long *nmask, unsigned long maxnode, unsigned flags);
 extern long set_mempolicy(int mode, const unsigned long *nmask,
 			  unsigned long maxnode);
+extern long setnumamempolicyw(int mode, const unsigned long *nmask,
+			  unsigned long maxnode, const short *weights);
 extern long migrate_pages(int pid, unsigned long maxnode,
 			  const unsigned long *frommask,
 			  const unsigned long *tomask);

@@ -34,6 +34,8 @@
 
 #define MAX_NODE 16
 
+int weighted_interleave;
+
 int exitcode;
 
 struct option opts[] = {
@@ -444,7 +446,7 @@ static struct bitmask *numactl_parse_nodestring(char *s, int flag)
 		return numa_parse_nodestring(s);
 }
 
-static void numactl_parse_nodeweights(const char *s, unsigned int *weights)
+static void numactl_parse_nodeweights(const char *s, short *weights)
 {
 	char *end;
 
@@ -483,6 +485,8 @@ int main(int ac, char **av)
 		weights[i]=-1;
 	}
 
+	weighted_interleave = -1;
+
 	get_short_opts(opts, shortopts);
 	while ((c = getopt_long(ac, av, shortopts, opts, NULL)) != -1)
 	{
@@ -520,7 +524,7 @@ int main(int ac, char **av)
 		case 'w': /* --weigths */
 			checknuma();
 			numactl_parse_nodeweights(optarg, (unsigned int *)weights);
-			
+			weighted_interleave = 1;
 			break;
 
 		case 'N': /* --cpunodebind */

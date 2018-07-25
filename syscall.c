@@ -39,6 +39,7 @@
 #define __NR_get_mempolicy 239
 #define __NR_migrate_pages 256
 #define __NR_move_pages 279
+#define __NR_setnumamempolicyw 333
 
 #elif defined(__ia64__)
 #define __NR_sched_setaffinity    1231
@@ -59,6 +60,7 @@
 #define __NR_set_mempolicy 276
 #define __NR_migrate_pages 294
 #define __NR_move_pages 317
+#define __NR_setnumamempolicyw 333
 
 #elif defined(__powerpc__)
 
@@ -66,6 +68,7 @@
 #define __NR_get_mempolicy 260
 #define __NR_set_mempolicy 261
 #define __NR_migrate_pages 258
+#define __NR_setnumamempolicyw 333
 /* FIXME: powerpc is missing move pages!!!
 #define __NR_move_pages xxx
 */
@@ -209,6 +212,14 @@ long WEAK set_mempolicy(int mode, const unsigned long *nmask,
 {
 	long i;
 	i = syscall(__NR_set_mempolicy,mode,nmask,maxnode);
+	return i;
+}
+
+long WEAK setnumamempolicyw(int mode, const unsigned long *nmask,
+                                   unsigned long maxnode, const short *weights)
+{
+	long i;
+	i = syscall(__NR_setnumamempolicyw,mode,nmask,maxnode,weights);
 	return i;
 }
 
