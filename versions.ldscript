@@ -51,6 +51,7 @@ libnuma_1.1 {
     numa_sched_setaffinity;
     numa_set_bind_policy;
     numa_set_interleave_mask;
+    numa_set_winterleave_mask;
     numa_set_localalloc;
     numa_set_membind;
     numa_set_preferred;
@@ -141,6 +142,7 @@ libnuma_1.2 {
     numa_sched_setaffinity;
     numa_set_bind_policy;
     numa_set_interleave_mask;
+    numa_set_winterleave_mask;
     numa_set_localalloc;
     numa_set_membind;
     numa_set_preferred;

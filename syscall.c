@@ -25,7 +25,7 @@
 
 #if !defined(__NR_mbind) || !defined(__NR_set_mempolicy) || \
     !defined(__NR_get_mempolicy) || !defined(__NR_migrate_pages) || \
-    !defined(__NR_move_pages)
+    !defined(__NR_move_pages) || !defined(__NR_setnumamempolicyw)
 
 #if defined(__x86_64__)
 
@@ -95,6 +95,7 @@
 #define __NR_get_mempolicy (__NR_Linux + 228)
 #define __NR_set_mempolicy (__NR_Linux + 229)
 #define __NR_migrate_pages (__NR_Linux + 246)
+#define __NR_setnumamempolicyw (__NR_Linux + 333)
 #endif
 
 #if _MIPS_SIM == _ABIN32
@@ -106,6 +107,7 @@
 #define __NR_get_mempolicy (__NR_Linux + 232)
 #define __NR_set_mempolicy (__NR_Linux + 233)
 #define __NR_migrate_pages (__NR_Linux + 250)
+#define __NR_setnumamempolicyw (__NR_Linux + 333)
 #endif
 
 #elif defined(__hppa__)

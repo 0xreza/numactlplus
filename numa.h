@@ -172,6 +172,8 @@ void numa_bind(struct bitmask *nodes);
 /* Set the NUMA node interleaving mask. 0 to turn off interleaving */
 void numa_set_interleave_mask(struct bitmask *nodemask);
 
+void numa_set_winterleave_mask(struct bitmask *nodemask, short *weights);
+
 /* Return the current interleaving mask */
 struct bitmask *numa_get_interleave_mask(void);
 
@@ -340,6 +342,16 @@ static inline void numa_set_interleave_mask_compat(nodemask_t *nodemask)
 	tmp.size = sizeof(nodemask_t) * 8;
 	numa_set_interleave_mask(&tmp);
 }
+
+static inline void numa_set_winterleave_mask_compat(nodemask_t *nodemask, short *weights)
+{
+	struct bitmask tmp;
+
+	tmp.maskp = (unsigned long *)nodemask;
+	tmp.size = sizeof(nodemask_t) * 8;
+	numa_set_winterleave_mask(&tmp, weights);
+}
+
 
 static inline nodemask_t numa_get_interleave_mask_compat()
 {

@@ -72,6 +72,8 @@ numa \- NUMA policy library
 .br
 .BI "void numa_set_interleave_mask(struct bitmask *" nodemask );
 .br
+.BI "void numa_set_winterleave_mask(struct bitmask *" nodemask, short *" weights);
+.br
 .BI "void numa_interleave_memory(void *" start ", size_t " size ", struct bitmask *" nodemask );
 .br
 .BI "void numa_bind(struct bitmask *" nodemask );
@@ -442,6 +444,9 @@ calling
 returns the current interleave mask if the task's memory allocation policy
 is page interleaved.
 Otherwise, this function returns an empty mask.
+
+.BR numa_set_winterleave_mask ()
+Weighted interelave
 
 .BR numa_set_interleave_mask ()
 sets the memory interleave mask for the current task to

@@ -34,7 +34,7 @@
 
 #define MAX_NODE 16
 
-int weighted_interleave;
+int weighted_interleave = -1;
 
 int exitcode;
 
@@ -458,7 +458,7 @@ static void numactl_parse_nodeweights(const char *s, short *weights)
 		{
 			if (weights[j] == -1)
 			{
-				weights[j] = (unsigned int) arg;
+				weights[j] = (unsigned int)arg;
 				break;
 			}
 		}
@@ -480,9 +480,10 @@ int main(int ac, char **av)
 	char *end;
 	char shortopts[array_len(opts) * 2 + 1];
 	struct bitmask *mask = NULL;
-	unsigned int weights[MAX_NODE] = {-1};
-	for (int i=0; i<MAX_NODE; i++){
-		weights[i]=-1;
+	short weights[MAX_NODE] = {-1};
+	for (int i = 0; i < MAX_NODE; i++)
+	{
+		weights[i] = -1;
 	}
 
 	weighted_interleave = -1;
@@ -517,13 +518,23 @@ int main(int ac, char **av)
 			if (shmfd >= 0)
 				numa_interleave_memory(shmptr, shmlen, mask);
 			else
-				numa_set_interleave_mask(mask);
+			{
+				if (!weighted_interleave)
+				{ // normal case
+					numa_set_interleave_mask(mask);
+				}
+				else
+				{ // weighted interleave
+					numa_set_winterleave_mask(mask, (short *) &weights);
+				}
+			}
+
 			checkerror("setting interleave mask");
 			break;
 
 		case 'w': /* --weigths */
 			checknuma();
-			numactl_parse_nodeweights(optarg, (unsigned int *)weights);
+			numactl_parse_nodeweights(optarg, (short *) &weights);
 			weighted_interleave = 1;
 			break;
 

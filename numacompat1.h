@@ -1,4 +1,5 @@
 #define numa_set_interleave_mask(m)     numa_set_interleave_mask_compat(m)
+#define numa_set_winterleave_mask(m,w)  numa_set_winterleave_mask_compat(m,w)
 #define numa_get_interleave_mask()      numa_get_interleave_mask_compat()
 #define numa_bind(m)                    numa_bind_compat(m)
 #define numa_get_membind(m)             numa_get_membind_compat(m)
