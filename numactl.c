@@ -23,6 +23,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <ctype.h>
+#include <stdbool.h>
 #include "numa.h"
 #include "numaif.h"
 #include "numaint.h"
@@ -32,9 +33,9 @@
 #define CPUSET 0
 #define ALL 1
 
-#define MAX_NODE 16
+#define MAX_NODE 8
 
-int weighted_interleave = -1;
+bool weighted_interleave = false;
 
 int exitcode;
 
@@ -486,7 +487,7 @@ int main(int ac, char **av)
 		weights[i] = -1;
 	}
 
-	weighted_interleave = -1;
+	weighted_interleave = false;
 
 	get_short_opts(opts, shortopts);
 	while ((c = getopt_long(ac, av, shortopts, opts, NULL)) != -1)
@@ -521,11 +522,13 @@ int main(int ac, char **av)
 			{
 				if (!weighted_interleave)
 				{ // normal case
+					printf("weighted_interleave false\n");
 					numa_set_interleave_mask(mask);
 				}
 				else
 				{ // weighted interleave
-					numa_set_winterleave_mask(mask, (short *) &weights);
+					printf("weighted_interleave true\n");
+					numa_set_winterleave_mask(mask, (short *)&weights);
 				}
 			}
 
@@ -534,8 +537,8 @@ int main(int ac, char **av)
 
 		case 'w': /* --weigths */
 			checknuma();
-			numactl_parse_nodeweights(optarg, (short *) &weights);
-			weighted_interleave = 1;
+			numactl_parse_nodeweights(optarg, (short *)&weights);
+			weighted_interleave = true;
 			break;
 
 		case 'N': /* --cpunodebind */
