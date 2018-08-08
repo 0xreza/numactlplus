@@ -450,12 +450,13 @@ static struct bitmask *numactl_parse_nodestring(char *s, int flag)
 static void numactl_parse_nodeweights(const char *s, short *weights)
 {
 	char *end;
+	int j;
 
 	do
 	{
 		unsigned long arg;
 		arg = strtoul(s, &end, 0);
-		for (int j = 0; j < MAX_NODE; j++)
+		for (j = 0; j < MAX_NODE; j++)
 		{
 			if (weights[j] == -1)
 			{
@@ -482,7 +483,7 @@ int main(int ac, char **av)
 	char shortopts[array_len(opts) * 2 + 1];
 	struct bitmask *mask = NULL;
 	short weights[MAX_NODE] = {-1};
-	for (int i = 0; i < MAX_NODE; i++)
+	for (i = 0; i < MAX_NODE; i++)
 	{
 		weights[i] = -1;
 	}
