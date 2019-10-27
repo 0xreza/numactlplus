@@ -1,3 +1,21 @@
+# numactl+
+
+The paper below proposes a bandwidth-aware page placement approach for NUMA architectures. As a part of that work, we implemented a new page allocation policy in the Linux kernel, called "weighted interleave" which enables weighted allocation of pages on specified NUMA nodes for the specified applications.
+
+The modified linux kernel is available [here](https://github.com/0xreza/SNAKE-4.17.12).
+
+Example) to allocate the pages for [target_program] on the nodes 0 and 2 with the 1:3 proportions:
+
+```
+./numactl --weights=1,3 --interleave=0,2 [target_program]
+```
+
+__D. Gureya, J. Neto, P. Romano, R. Rodrigues, V. Quema, P. Bhatotia, R. Karimi, V. Vlassov, J. Barreto,
+“BWAP: Bandwidth-Aware Page Placement for NUMA Architectures” [in submission]__
+
+Please send an email to "paper[at]0xreza[dot]com", to recieve the pre-print version of the paper.
+
+
 # numactl
 
 [![Build Status](https://travis-ci.org/numactl/numactl.svg?branch=master)](https://travis-ci.org/numactl/numactl)
