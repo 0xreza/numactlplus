@@ -1,5 +1,7 @@
 # numactl+
 
+[![Build Status](https://api.travis-ci.org/0xreza/numactlplus.svg?branch=master)](https://travis-ci.org/0xreza/numactlplus)
+
 The paper below proposes a bandwidth-aware page placement approach for NUMA architectures. As a part of that work, we implemented a new page allocation policy in the Linux kernel, called "weighted interleave" which enables weighted allocation of pages on specified NUMA nodes for the specified applications.
 
 The modified linux kernel is available [here](https://github.com/0xreza/SNAKE-4.17.12).
@@ -17,8 +19,6 @@ Please send an email to "paper[at]0xreza[dot]com", to recieve the pre-print vers
 
 
 # numactl
-
-[![Build Status](https://travis-ci.org/numactl/numactl.svg?branch=master)](https://travis-ci.org/numactl/numactl)
 
 Simple NUMA policy support. It consists of a numactl program to run other
 programs with a specific NUMA policy and a libnuma shared library ("NUMA API")
